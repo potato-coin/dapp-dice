@@ -12,6 +12,9 @@ input[type=range] {
   -webkit-appearance: none;
   width: 100%;
   border-radius: 10px;
+
+  background-color: red;
+  
   /*这个属性设置使填充进度条时的图形为圆角*/
 }
 
@@ -54,7 +57,7 @@ input[type=range]::-webkit-slider-thumb {
 .top {
   display: flex;
   align-items: center;
-  margin: 0 21px 22px;
+  margin: 0 21px 17px;
 }
 
 .top .dapp-title {
@@ -78,7 +81,6 @@ input[type=range]::-webkit-slider-thumb {
   color: #FED702;
   font-weight: bold;
 }
-
 
 .balance {
   padding: 15px 0;
@@ -115,7 +117,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .dice-content {
   margin: 0 14px;
-  padding: 28px 25px;
+  padding: 23px 25px;
   background: linear-gradient(0deg, rgba(99, 27, 124, 1) 0%, rgba(166, 60, 108, 1) 100%);
   box-shadow: 0px 4px 3px 0px rgba(195, 89, 158, 1), 0px -4px 3px 0px rgba(68, 17, 84, 0.4);
   border-radius: 5px;
@@ -124,7 +126,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .number-group {
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 
 .number-item {
@@ -163,12 +165,12 @@ input[type=range]::-webkit-slider-thumb {
 
 .slider {
 
-  margin-bottom: 43px;
+  margin-bottom: 23px;
 }
 
 .odds-group {
   display: flex;
-  margin-bottom: 38px;
+  margin-bottom: 18px;
 }
 
 .odd-item {
@@ -199,7 +201,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .game-exception {
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
 }
 
 .exception-item {
@@ -246,7 +248,7 @@ input[type=range]::-webkit-slider-thumb {
 
 .game-result {
   margin: 0 14px 16px;
-  padding: 28px 25px;
+  padding: 19px 25px;
   background: linear-gradient(0deg, rgba(164, 60, 109, 1) 0%, rgba(100, 28, 123, 1) 100%);
   box-shadow: 0px 4px 3.5px 0px rgba(195, 89, 158, 1), 0px -4px 3px 0px rgba(68, 17, 84, 0.4);
   border-radius: 5px;

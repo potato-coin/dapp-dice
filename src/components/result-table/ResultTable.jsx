@@ -59,12 +59,12 @@ class ResultTable extends React.Component {
 
   render() {
 
-    const { classes, list } = this.props;
+    const { classes, list, self } = this.props;
     return (
       <Table className="table">
       <TableHead>
         <TableRow className={classes.headerRow}>
-          <CustomTableCell align="center">姓名</CustomTableCell>
+          { !self && (<CustomTableCell align="center">姓名</CustomTableCell>) }
           <CustomTableCell align="center">倍数</CustomTableCell>
           <CustomTableCell align="center">金额</CustomTableCell>
           <CustomTableCell align="center">结果</CustomTableCell>
@@ -79,11 +79,11 @@ class ResultTable extends React.Component {
           
             return (
               <TableRow key={row.id} className={classes.row} >
-                <CustomTableCell align="left">{row.player}</CustomTableCell>
+                {  !self && (<CustomTableCell align="left">{row.player}</CustomTableCell>) }
                 <CustomTableCell align="center">{ odd.toFixed(4)+'X' }</CustomTableCell>
                 <CustomTableCell align="center">{row.amount}</CustomTableCell>
                 <CustomTableCell align="center">{ row.random_roll } ({row.roll_under})</CustomTableCell>
-                <CustomTableCell align="center">{ (row.random_roll < row.roll_under) ? (amount * odd).toFixed(4) + 'POC': '-' }</CustomTableCell>
+                <CustomTableCell align="center">{ (row.random_roll < row.roll_under) ? (amount * odd).toFixed(4) + ' POC': '-' }</CustomTableCell>
               </TableRow>
             )
           }

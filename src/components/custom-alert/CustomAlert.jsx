@@ -1,11 +1,11 @@
 import React from 'react';
-// import { withStyles } from '@material-ui/core/styles';
+
 // import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import { Button } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+// import { withStyles } from '@material-ui/core/styles';
+import './CustomAlert.css';
+
+
 
 // const CustomButton = withStyles({
 //   root: {
@@ -43,26 +43,26 @@ export default class CustomAlert extends React.Component {
 
   render() {
 
-    const { dialogTitle, dialogSubtitle, onClose, open } = this.props;
+    const { dialogTitle, dialogSubtitle,
+      dialogIcon,
+       onClose, open } = this.props;
     return (
-      <Dialog
+      <Modal
         open={open}
         onClose={onClose}
       >
-        <DialogContent>
-          <DialogContentText>
-            {dialogTitle + 1231231}
-          </DialogContentText>
-          <DialogContentText>
-            {dialogSubtitle}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose} color="primary" autoFocus>
+        <div className="paper">
+          <div className="paper-content">
+            <p className="title"> <span className={`iconfont dialog-icon ${dialogIcon}`} ></span>  { dialogTitle } </p>
+            <p className="subtitle">{ dialogSubtitle}</p>
+          </div>
+          
+    
+          <div className="paper-bottom" onClick={onClose}>
             好的
-          </Button>
-        </DialogActions>
-      </Dialog>
+          </div>
+        </div>
+      </Modal>
     );
   }
 

@@ -9,8 +9,6 @@ import Tab from '@material-ui/core/Tab';
 import ResultTable from './components/result-table/ResultTable';
 import CustomAlert from './components/custom-alert/CustomAlert';
 
-
-
 const styles = theme => ({
   tabsRoot: {
     background: 'rgba(85,0,106,1)',
@@ -50,9 +48,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    const initCompareNum = 70;
+    const initCompareNum = 50;
     const initAmountIn = 1;
-    const initOdd = getOdd(initCompareNum, initAmountIn)
+    const initOdd = getOdd(initCompareNum)
 
     this.state = {
       resultTabValue: 0,
@@ -69,7 +67,8 @@ class App extends React.Component {
       selfResultList: [],
       open: false,
       dialogTitle: '',
-      dialogSubtitle: ''
+      dialogSubtitle: '',
+      dialogIcon: ''
     }
   }
 
@@ -86,10 +85,10 @@ class App extends React.Component {
   render() {
 
     const { classes } = this.props;
-    const { 
+    const {
       resultTabValue, cWallet, totalBalance, compareNum,
       odd, chance, winBalance, luckyNum,
-      dialogTitle, dialogSubtitle, open
+      dialogTitle, dialogSubtitle, dialogIcon, open
     } = this.state;
 
     return (
@@ -99,7 +98,7 @@ class App extends React.Component {
           <div className="dapp-title">POC DICE</div>
           <p className="core-balance-amount">{cWallet.coreBalance}</p>
         </div>
-        
+
         <div className="balance">
           <p className="balance-title">当前奖池总金额</p>
           <p className="balance-amount">{totalBalance}</p>
@@ -114,11 +113,14 @@ class App extends React.Component {
             </div>
             <div className="luckly-num number-item">
               <p className="number-title">幸运数</p>
-              <p className="number-amount luckly-number-ammout">{ luckyNum }</p>
+              <p className="number-amount luckly-number-ammout">{luckyNum}</p>
             </div>
           </div>
           <div className="slider">
-            <input type="range" min={2} max={96} name="points" value={compareNum} onChange={this._handleCompareNumChange} />
+            <input type="range" min={2} max={96} name="points"
+              value={compareNum}
+              style={{background:'linear-gradient(to right, #227819, white ' + compareNum + '%, white)'}}
+              onChange={this._handleCompareNumChange} />
           </div>
 
 
@@ -172,31 +174,33 @@ class App extends React.Component {
 
           <div className="table-container">
             {resultTabValue === 0 && <ResultTable list={this.state.allResultList} />}
-            {resultTabValue === 1 && <ResultTable list={this.state.selfResultList} />}
+            {resultTabValue === 1 && <ResultTable self={true} list={this.state.selfResultList} />}
           </div>
         </div>
 
 
-        <CustomAlert 
+        <CustomAlert
           dialogTitle={dialogTitle}
           dialogSubtitle={dialogSubtitle}
+          dialogIcon={dialogIcon}
           open={open}
-          onClose={this._handleClose} 
+          onClose={this._handleClose}
         />
- 
+
 
       </div>
     );
   }
 
 
-  
+
 
   _handleClose = () => {
-    this.setState({ 
+    this.setState({
       open: false,
       dialogTitle: '',
-      dialogSubtitle: ''
+      dialogSubtitle: '',
+      dialogIcon: ''
     });
   }
 
@@ -211,7 +215,7 @@ class App extends React.Component {
       compareNum: event.target.value
     });
 
-    const odd = getOdd(compareNum, amountIn);
+    const odd = getOdd(compareNum);
     this.setState({
       odd: odd.toFixed(4) + 'X',
       chance: compareNum - 1 + '%',
@@ -223,7 +227,7 @@ class App extends React.Component {
   _handleAmountInChange = (event) => {
     const { compareNum } = this.state;
     const amountIn = event.target.value;
-    const odd = getOdd(compareNum, amountIn);
+    const odd = getOdd(compareNum);
     this.setState({
       amountIn: amountIn,
       odd: odd.toFixed(4) + 'X',
@@ -232,6 +236,17 @@ class App extends React.Component {
   }
 
   _beginGame = () => {
+
+    const { winBalance, totalBalance } = this.state;
+
+    if (Number(winBalance) * 10 > Number(totalBalance.split(' ')[0])) {
+      this.setState({
+        open: true,
+        dialogTitle: '下注失败',
+        dialogSubtitle: '赢取的最大奖金必须小于当前奖池的十分之一'
+      });
+      return;
+    }
 
     const { cWallet, amountIn, compareNum } = this.state;
     const args = {
@@ -247,9 +262,12 @@ class App extends React.Component {
     window.runAction(args, (error, result) => {
 
       if (error) {
-        return setTimeout(() => {
-          alert(JSON.stringify(error));
-        }, 200);
+        const body = error.body || { };
+        return this.setState({
+          open: true,
+          dialogTitle: body.status,
+          dialogSubtitle: body.msg
+        })
       }
 
       if (result && result.status === 0) {
@@ -259,6 +277,12 @@ class App extends React.Component {
           this._getAllResult();
           this._getMyResult(block_time, act.data.memo);
         }, 3000);
+      } else {
+        this.setState({
+          open: true,
+          dialogTitle: result  && result.error_code,
+          dialogSubtitle: result && result.message
+        });
       }
     })
   }
@@ -280,7 +304,11 @@ class App extends React.Component {
     }
 
     window.getTableRows(args, (err, data) => {
-      console.log(data);
+
+      if(err) {
+        return ;
+      }
+      
       this.setState({
         allResultList: data.rows
       })
@@ -300,7 +328,7 @@ class App extends React.Component {
 
     window.getTableRows(args, (err, data) => {
 
-      if(err) {
+      if (err) {
         return;
       }
 
@@ -321,35 +349,36 @@ class App extends React.Component {
           }
         }
 
-
-
-
         if (currentRow) {
-
-
           const { random_roll, roll_under, amount } = currentRow;
           const amountNum = Number(amount.split(' ')[0]);
-          const odd = getOdd(roll_under, amountNum);
+          const odd = getOdd(roll_under);
 
-          let title, subtitle;
+          let title, subtitle, icon;
           if (random_roll < roll_under) {
             // win
+            icon = 'iconxiaolian'
             title = '恭喜你，你赢了';
-            subtitle = `${random_roll}(${roll_under}) + ${(odd * amountNum).toFixed(4) + 'POC'}`
+            subtitle = `${random_roll} (${roll_under})  + ${(odd * amountNum).toFixed(4) + 'POC'}`
           } else {
             // fail
+            icon = 'iconkulian'
             title = '很抱歉，你输了';
-            subtitle = `${random_roll}(${roll_under})`;
+            subtitle = `${random_roll} (${roll_under})`;
           }
 
           this.setState({
             luckyNum: currentRow.random_roll,
             dialogTitle: title,
             dialogSubtitle: subtitle,
+            dialogIcon: icon,
             open: true
           });
         } else {
-          alert('没有找到相关记录');
+          this.setState({
+            open: true,
+            dialogTitle: '没有找到相关记录'
+          })
         }
       }
 
@@ -363,7 +392,7 @@ class App extends React.Component {
   _getUserInfo() {
     window.getUserInfo(null, (error, data) => {
 
-      if(error) {
+      if (error) {
         return;
       }
 
@@ -386,7 +415,7 @@ class App extends React.Component {
 
     window.getCurrencyBalance({ account: 'dice2' }, (err, data) => {
 
-      if(err) {
+      if (err) {
         return;
       }
 
