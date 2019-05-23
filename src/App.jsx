@@ -255,7 +255,7 @@ class App extends React.Component {
       name: 'bet',
       data: {
         player: cWallet.name,
-        amount: amountIn + ' POC',
+        amount: Number(amountIn).toFixed(4) + ' POC',
         rollnum: compareNum,
       }
     }
