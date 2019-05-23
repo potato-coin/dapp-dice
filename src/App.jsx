@@ -119,7 +119,7 @@ class App extends React.Component {
           <div className="slider">
             <input type="range" min={2} max={96} name="points"
               value={compareNum}
-              style={{background:'linear-gradient(to right, #227819, white ' + compareNum + '%, white)'}}
+              style={{background:`linear-gradient(to right, #227819, #227819 ${compareNum}%,white ${compareNum}%, white)`}}
               onChange={this._handleCompareNumChange} />
           </div>
 
