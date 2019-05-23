@@ -75,7 +75,7 @@ class ResultTable extends React.Component {
         {list.map(row => {
 
             const amount =  Number(row.amount.split(' ')[0]);
-            const odd = getOdd(row.roll_under, amount);
+            const odd = getOdd(row.roll_under);
           
             return (
               <TableRow key={row.id} className={classes.row} >
