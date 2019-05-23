@@ -265,7 +265,7 @@ class App extends React.Component {
         const body = error.body || { };
         return this.setState({
           open: true,
-          dialogTitle: body.status,
+          dialogTitle: body.status+ '268',
           dialogSubtitle: body.msg
         })
       }
@@ -280,7 +280,7 @@ class App extends React.Component {
       } else {
         this.setState({
           open: true,
-          dialogTitle: result  && result.error_code,
+          dialogTitle: result  && result.error_code + '283' + JSON.stringify(result),
           dialogSubtitle: result && result.message
         });
       }
@@ -369,7 +369,7 @@ class App extends React.Component {
 
           this.setState({
             luckyNum: currentRow.random_roll,
-            dialogTitle: title,
+            dialogTitle: title + '372',
             dialogSubtitle: subtitle,
             dialogIcon: icon,
             open: true
@@ -377,7 +377,7 @@ class App extends React.Component {
         } else {
           this.setState({
             open: true,
-            dialogTitle: '没有找到相关记录'
+            dialogTitle: '没有找到相关记录380'
           })
         }
       }
