@@ -74,6 +74,11 @@ class ResultTable extends React.Component {
       <TableBody>
         {list.map(row => {
 
+            // 没有计算出结果
+            if(!row.random_roll) {
+              return null;
+            }
+
             const amount =  Number(row.amount.split(' ')[0]);
             const odd = getOdd(row.roll_under);
           

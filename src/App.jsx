@@ -79,7 +79,15 @@ class App extends React.Component {
   componentDidMount() {
     this._refreshAmount();
     this._getAllResult();
+    this.interverId = setInterval(()=> {
+      this._refreshAmount();
+      this._getAllResult();
+      this._getMyResult();
+    }, 3000);
+  
   }
+
+
 
 
   render() {
@@ -351,6 +359,12 @@ class App extends React.Component {
 
         if (currentRow) {
           const { random_roll, roll_under, amount } = currentRow;
+
+          // 还没有计算出来
+          if(!random_roll) {
+            return;
+          }
+
           const amountNum = Number(amount.split(' ')[0]);
           const odd = getOdd(roll_under);
 
