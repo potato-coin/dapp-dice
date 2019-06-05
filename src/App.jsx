@@ -270,11 +270,10 @@ class App extends React.Component {
     window.runAction(args, (error, result) => {
 
       if (error) {
-        const body = error.body || { };
         return this.setState({
           open: true,
-          dialogTitle: body.status,
-          dialogSubtitle: body.msg
+          dialogTitle: error.status,
+          dialogSubtitle: error.msg
         })
       }
 
