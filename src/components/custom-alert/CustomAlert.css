@@ -1,0 +1,43 @@
+.paper{ 
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 7px;
+  transform: translate(-50%, -50%);
+  min-width: 290px;
+  overflow: hidden;
+}
+
+.paper-content {
+  background-color: #3E0540;
+  padding: 25px 10px;
+}
+
+.paper-content p {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.paper-content .title {
+  margin-bottom: 26px;
+  font-size: 16px;
+}
+
+.paper-content .subtitle {
+  font-size: 18px;
+}
+
+.paper-bottom {
+  background-color: #8B0861;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+
+.dialog-icon {
+  color: #FEC707;
+}

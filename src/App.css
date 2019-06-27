@@ -1,0 +1,272 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: PingFang-SC-Bold;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  border-radius: 10px;
+
+  background-color: red;
+  
+  /*这个属性设置使填充进度条时的图形为圆角*/
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+
+input[type=range]::-webkit-slider-runnable-track {
+  height: 14px;
+  border-radius: 10px;
+  /*将轨道设为圆角的*/
+  box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112;
+  /*轨道内置阴影效果*/
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 25px;
+  width: 38px;
+  margin-top: -5px;
+  /* 使滑块超出轨道部分的偏移量相等 */
+  background: #FDB300;
+  border: solid 0.125em rgba(205, 224, 230, 0.5);
+  /* 设置边框 */
+  box-shadow: 0 .125em .125em #3b4547;
+  /* 添加底部阴影 */
+}
+
+.app {
+  padding-top: 22px;
+  padding-bottom: 22px;
+  background: rgba(62, 5, 64, 1);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  margin: 0 21px 17px;
+}
+
+.top .dapp-title {
+  width: 150px;
+  height: 34px;
+  
+  border: 2px solid rgba(255, 165, 224, 1);
+  border-radius: 1000px;
+  text-align: center;
+  line-height: 34px;
+  font-size: 17px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+  opacity: 0.85;
+}
+
+.top .core-balance-amount {
+  flex: 1;
+  text-align: right;
+  font-size: 16px;
+  color: #FED702;
+  font-weight: bold;
+}
+
+.balance {
+  padding: 15px 0;
+  margin: 0 21px 12px;
+  background: rgba(66, 32, 67, 1);
+  border: 8px solid rgba(163, 34, 128, 1);
+  box-shadow: 5px 8px 12px 1px rgba(165, 59, 108, 0.46);
+  /* box-shadow: 3px 0px 0px 0px rgba(231, 151, 51, 0.09),
+    0px 2px 3px 0px rgba(253, 199, 35, 0.19),
+    -3px 0px 3px 0px rgba(77, 149, 251, 0.15),
+    0px -2px 3px 0px rgba(79, 150, 249, 0.15); */
+  border-radius: 5px;
+}
+
+.balance-title {
+  font-size: 14px;
+  line-height: 15px;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+  margin-bottom: 14px;
+}
+
+.balance-amount {
+  font-size: 29px;
+  font-weight: bold;
+  color: rgba(255, 168, 9, 1);
+  line-height: 29px;
+  opacity: 0.95;
+  /* -webkit-text-stroke:2px undefined;
+  text-stroke:2px undefined; */
+  text-align: center;
+}
+
+.dice-content {
+  margin: 0 14px;
+  padding: 23px 25px;
+  background: linear-gradient(0deg, rgba(99, 27, 124, 1) 0%, rgba(166, 60, 108, 1) 100%);
+  box-shadow: 0px 4px 3px 0px rgba(195, 89, 158, 1), 0px -4px 3px 0px rgba(68, 17, 84, 0.4);
+  border-radius: 5px;
+  margin-bottom: 13px;
+}
+
+.number-group {
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.number-item {
+  flex: 1;
+  background: rgba(55, 6, 35, 1);
+  border: 5px solid rgba(192, 51, 143, 0.91);
+  opacity: 0.8;
+  border-radius: 5px;
+}
+
+.basic-num {
+  margin-right: 13px;
+}
+
+.number-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: rgba(255, 185, 225, 1);
+  line-height: 11px;
+  text-align: center;
+  padding: 14px;
+}
+
+.number-amount {
+  font-size: 36px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1);
+  line-height: 28px;
+  margin: 0 0 15px;
+  text-align: center;
+}
+
+.luckly-number-ammout {
+  color: rgba(49, 224, 160, 1);
+}
+
+.slider {
+
+  margin-bottom: 23px;
+}
+
+.odds-group {
+  display: flex;
+  margin-bottom: 18px;
+}
+
+.odd-item {
+  flex: 1;
+  background: rgba(102, 22, 88, 1);
+  border-radius: 5px;
+  padding: 7px 0;
+}
+
+.odd {
+  margin-right: 12px;
+}
+
+.odd-title {
+  font-size: 11px;
+  line-height: 13px;
+  text-align: center;
+  margin-bottom: 8px;
+  color: white;
+  text-align: center;
+}
+
+.odd-amount {
+  font-size: 15px;
+  color: white;
+  text-align: center;
+}
+
+.game-exception {
+  display: flex;
+  margin-bottom: 22px;
+}
+
+.exception-item {
+  flex: 1;
+}
+
+.exception-in {
+  margin-right: 13px;
+}
+
+.exception-label {
+  font-size: 15px;
+  margin-bottom: 11px;
+  color: #D999BD;
+}
+
+.exception-content {
+  height: 42px;
+  background: rgba(139, 8, 97, 1);
+  opacity: 0.7;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  width: 100%;
+  line-height: 42px;
+  font-size: 21px;
+  /* font-weight:bold; */
+  color: rgba(252, 252, 252, 1);
+  opacity: 0.9;
+  text-align: center;
+}
+
+.btn-begin {
+  margin: 0 25px;
+  height: 43px;
+  line-height: 43px;
+  background: rgba(253, 179, 0, 1);
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: bold;
+  color: rgba(142, 56, 0, 1);
+  text-align: center;
+}
+
+.game-result {
+  margin: 0 14px 16px;
+  padding: 19px 25px;
+  background: linear-gradient(0deg, rgba(164, 60, 109, 1) 0%, rgba(100, 28, 123, 1) 100%);
+  box-shadow: 0px 4px 3.5px 0px rgba(195, 89, 158, 1), 0px -4px 3px 0px rgba(68, 17, 84, 0.4);
+  border-radius: 5px;
+}
+
+.game-result .result-title {
+  margin: 0 auto 16px;
+  width: 100px;
+  height: 34px;
+  border: 2px solid rgba(255, 165, 224, 1);
+  border-radius: 1000px;
+  line-height: 34px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;
+  color: rgba(254, 254, 254, 1);
+}
+
+.table-container {
+  overflow: scroll;
+}
